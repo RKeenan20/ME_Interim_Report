@@ -1,4 +1,109 @@
+\section{Initial Theory \& Background}
+\subsection{WLAN Channel Model}
+\textbf{Give info on the wireless channel model in terms of the h matrix and more. what happens if i scale it to a mimo system and what the h matrix looks like then} \\\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Channel State Information (CSI)}
+\textbf{This is an estimation of the channel matrix H and is split into a different number of subcarriers depending on the bandwidth of the channel.From this we can obtain a characteristic of how the channel is behaving at a certain time. Speak about RSSI in the context of other papers and papers on indoor localisation and why it isnt correct to use it. Give the diagram from my presentation of the scattering signal} \\\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Obtaining CSI information}
+\textbf{How do we obtain CSI information, csi information requires beamforming to be activated. we can use the Linux CSI tool developed with Intel and Microsoft and talk about how it returns data and link to the document that released it} \\\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Related Work \& Existing Fall Detection Systems}
+\textbf{In this section, talk about the current work in the area and what they did to get any of it to work. However, then look at how each of them gathered the data classified after activity segmentation} \\\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Justification for Fall Detection Systems}
+\textbf{talk here about the need for fall detection systems due to the amount of people falling each year/the amount of people who are causing the financial and health systems to be overloaded with falls} \\\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Wearable Approaches}
+\textbf{Wearable approaches such as Accelerometers, phones, man down and what they have advantages and disadvantages. why they arent used. the privacy issues, the issue with people not wearing them} \\\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Ambient Environment Approaches} 
+\textbf{The ambient environment issues in terms of infrared, floor vibration and sound sensors. sound is an iffy one because of how busy some of these environments are such as in a home. the TV could be on and there could be a false detection......floor vibration is expensive and useless tbh} \\\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Fall Detection using CSI}
+\textbf{talk about any of the papers that have used it. first one will be WiFall, go through they use amplitude, how they get the data and how they organise it into different column arrays....talk about the frequency diversity and how it is actually impossible to limit it down, talk about the typical activity segmentation (what they use for activity detection), what they use for the classification and talk about how it is simply a binary decision \\ With Rt fall the decision is used to use the phase difference as it is a much more fine grainer use and this can be seen from Fila, E-eyes, perceiving accurate phase, what they used for each of it to get data or a model to train } \\\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Activity Segmentation}
+\textbf{Now that I have considered each of the ways of doing it, how can i spot an activity of falling vs any of the others. Use RT Fall for this and WiFall....talka about the function that RTFall used and also how they can determine a fall vs any other. \\ In this section I need to note how the finishing points of each activity is needed and this goes into feature extraction which determines whether a fall, walking or anything is happening \\ Talk about other papers that use the CSI but not for fall detection and how they use it for their purpose \\ RELATE BACK TO FUTURE WORK SECTION} \\\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Classification of a Fall}
+\textbf{Talk about the different classification techniques, how a 1 or 0 can be assigned in a binary classifier, as it is either a fall or no fall (walking or a fall like activity). Talk about their success rates and how others tried to improve on it. \\ RELATE BACK TO FUTURE WORK SECTION} \\\\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Citaat \cite{MScBuijs2010}
+
 Citaat met pagina \cite[p.~10]{MScNugteren2010}
 
 \url{http://en.wikibooks.org/wiki/LaTeX/}
