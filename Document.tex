@@ -1,5 +1,7 @@
 \documentclass[a4paper,11pt,twoside]{report}
-\usepackage{setspace}
+\usepackage[nodisplayskipstretch]{setspace}
+\usepackage{mathtools}
+\usepackage[round]{natbib}
 
 \usepackage{Packages}
 \usepackage[framed,numbered,autolinebreaks,useliterate]{Listings}
@@ -19,11 +21,9 @@
 \newcommand{\monthYear}{January 2020}
 
 \newcommand{\firstCommitteeMember}{Dr. Nam Tran}
-\newcommand{\secondCommitteeMember}{}
-\newcommand{\thirdCommitteeMember}{}
 
 \author{\me}
-
+\setlength{\parindent}{17pt}
 \hypersetup
 {
     pdfauthor   = {Robert Keenan},
@@ -63,13 +63,15 @@
 \chapter{Conclusion}\label{chapter:Conclusion}
 \input{Chapters/Chapter5_Conclusion.tex}
 
-\bibliographystyle{unsrt}
+\bibliographystyle{abbrvnat}
 \bibliography{References}
+\setcitestyle{authoryear,open={(},close={)}}
 \newpage
 
 \appendix
 %In this section I can add any code which was used to generate any of the cleaner plots/obtain the plots from the CSI Data
 %Put in any of the code that was used for the amplitude and the phase of each for just a 1x2 SIMO now
+%Look at listings.sty to see how to include the matlab code
 \addcontentsline{toc}{chapter}{Appendix}
 \chapter{My First Appendix}\label{chapter:Appendix A}
 \input{Appendices/Appendix_A.tex}
