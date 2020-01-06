@@ -1,4 +1,4 @@
-\section{Initial Theory \& Background}
+\section{Initial Theory}
 In terms of a Wireless Channel in the proposed Fall Detection System, it is preferred for the receiver to be able to estimate the state of the wireless channel. This can allow for optimisations to be made for optimal propagation of signals from transmitter to receiver. For the receiver to understand the state of the wireless channel, many models have been made which explain the properties and state of the channel.
 \subsection{WLAN Channel Model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -17,31 +17,53 @@ As small-scale fading is a phenomenon when the scattering signal environment cha
 A \textit{M} x \textit{N} (\textit{M} transmit and \textit{N} receive antennas) MIMO system can be modelled by the following equation at the receive antenna by a spatial vector \textbf{y} with a sampling period of T = 1/Bandwidth:
 \vspace{-11pt}
 \begin{equation}\label{eqn:2.1}
-    \textbf{y}(k) = \textbf{H}(k)\textbf{x}(k)+\textbf{n}(k)
+    \textbf{y}(t) = \textbf{H}(t)\textbf{x}(t)+\textbf{n}(t)
     \vspace{-11pt}
 \end{equation}
-where  $\textbf{x}(k) = \begin{bsmallmatrix}{x_1(k) & \cdots & x_M(k)}\end{bsmallmatrix}^T$ is the vector of transmitted signals, $\textbf{n}(k) = \begin{bsmallmatrix}{n_1(k) & \cdots & n_N(k)}\end{bsmallmatrix}^T$ is the AWGN (noise) vector for the channel and as mentioned before, $\textbf{H}(k)$ is the channel response matrix for the MIMO system at each time instance given by $k$.\citep{channelEquations}
+where  $\textbf{x}(t) = \begin{bsmallmatrix}x_1(t) & \cdots & x_M(t)\end{bsmallmatrix}^T$ is the vector of transmitted signals, $\textbf{n}(t) = \begin{bsmallmatrix}n_1(t) & \cdots & n_N(t)\end{bsmallmatrix}^T$ is the AWGN (noise) vector for the channel and as mentioned before, $\textbf{H}(t)$ is the channel response matrix for the MIMO system at each time instance given by $t$ \citep{channelEquations}. \par
+The majority of today's Wi-Fi networks operate in the 2-5GHz range and as a result, suffer from the propagation losses mentioned already of multi-path fading and path loss. Orthogonal Frequency Division Multiplexing (OFDM) was proposed to offer a robust solution at these frequencies to narrow-band interference. OFDM is the method of digital modulation whereby the signal to be transmitted is split into a number of narrow-band channels at frequencies above and below the centre frequency (5GHz for example) \citep{OFDM}.
+These narrow-band channels at different frequencies are also known as subcarriers and as previously mentioned, the method to obtain higher data rates was MIMO-OFDM whereby multiple data streams are utilised between a number of transmit and receive antennas \citep{802.11nStandard}. OFDM uses a number of modulation schemes such as QAM and PSK. For each OFDM symbol, there are a number of QAM values depending on the bandwidth of the channel. The application of the IFFT modulates the OFDM symbol onto a number of subcarriers. This is followed by adding cyclic prefix to make the signal robust to multipath propagation while windowing and IQ modulation are applied before transmitting \citep{OFDM, 802.11nStandard}. \par
+In Equation \ref{eqn:2.1}, the channel model for a MIMO system is described for \textit{M} transmit and \textit{N} receive antennas. However, in a MIMO-OFDM system there are a number of subcarriers depending on the bandwidth. In 802.11n, the number of subcarriers sent is dependent on the bandwidth and the grouping constant. The grouping constant is used to group adjacent subcarriers and report them as a single value to reduce the size of the report field \citep{full802.11nStandard}. Thus, Equation \ref{eqn:2.1} can be rewritten as the following for the subcarrier $k$ at one time instance for a MIMO-OFDM system:
+\vspace{-11pt}
+\begin{equation}\label{eqn:2.2}
+    \textbf{y}_k = \textbf{H}_k\textbf{x}_k+\textbf{n}_k
+    \vspace{-11pt}
+\end{equation}
+where $\textbf{x}_k = \begin{bsmallmatrix}x_{k,1} & \cdots & x_{k,M}\end{bsmallmatrix}^T$ is the vector of transmitted signals, $\textbf{n}_k = \begin{bsmallmatrix}n_{k,1} & \cdots & n_{k,N}\end{bsmallmatrix}^T$ is the AWGN (noise) vector for the channel. However, the channel matrix $\textbf{H}_{k}$ can be used to describe the channel response for each transmitter-receiver pair: 
+\vspace{-11pt}
+\begin{equation}\label{eqn:2.3}
+\textbf{h}_{k}=\left[
+\begin{array}{ccc}
+    h_{k,11} & \cdots & h_{k,M1} \\
+   \vdots & \ddots & \vdots \\
+    h_{k,1N} & \cdots & h_{k,MN}
+\end{array}
+\right]
+\end{equation}
+As there are many subcarriers, there are many of these matrices $\textbf{h}_{k}$. As described by the 802.11n standard, there are 56 pilot and data sub-carriers for 20MHz bandwidth and 114 for 40MHz bandwidth with a grouping constant $N_g = 1$. These are essential to the understanding of CSI which is concerned with obtaining the Channel Impulse Response \textbf{H} seen in the next section \citep{full802.11nStandard}.
+\textbf{Diagram of MIMO network and also subcarriers around the centre frequency}
 
-\textbf{TALK abotu the baseband model and the model in euler form, then OFDM and the different modulation schemes and also how the bandwidth is influencing the various subcarriers. Talk abouthe 802.11n and OFDM}
-
-  
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Channel State Information (CSI)}
-\textbf{This is an estimation of the channel matrix H and is split into a different number of subcarriers depending on the bandwidth of the channel.From this we can obtain a characteristic of how the channel is behaving at a certain time. Speak about RSSI in the context of other papers and papers on indoor localisation and why it isnt correct to use it. Give the diagram from my presentation of the scattering signal} \\\\
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The Channel State Information (CSI) describes the Channel Matrix \textbf{H} and thus, the wireless MIMO-OFDM channel itself. It can be described in 3-D matrix form for one packet with \textit{M} transmit antennas, \textit{N} receive antennas for a transmitter-receiver pair(Tx antenna $i$ and Rx antenna $j$)
+
+\textbf{Diagram of the CSI matrix}
+
+The depth of the 3-D matrix as shown above is clearly dependent on the number of subcarriers. Each subcarrier $k$ for a given transmitter-receiver pair ($ij$) conveys the channel amplitude/gain and the phase response of the channel at that time instance, $h_{k,ij} = |h_{k,ij}|e^{j\theta}$ \citep{OFDM}. Any change in the channel introduced by either path loss or multi-path fading (See Figure \ref{fig:LOS_NLOS}) will result in Channel Distortion (Amplitude distortion and phase shift).\par 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+COTS Wi-Fi devices do not collect CSI data readily available for the user of the Wi-Fi NIC. However, with the arrival of the 802.11n WLAN Standard in 2009, transmit beamforming was able to be utilised which could be used to estimate the channel over which a beamformee (Rx) and beamformer (Tx) are communicating. It estimates the channel through 2 methods: Implicit feedback and Explicit feedback. In implicit feedback the beamformer receives long trained symbols from the beamformee which it uses to estimate the channel. In explicit feedback, the beamformee makes a direct estimate from the training symbols sent by the beamformer \citep{full802.11nStandard}. In other words, the goal is to focus energy towards the receiver to increase the SNR of the wireless channel \citep{beamforming}. This simply means the beamformer can adjust and maximise the signal power at the receiver depending on the current state of the channel. In a LOS scenario, it can simply be seen as the Tx forming a beam to the Rx directly. \citep{beamforming}. This can give great insight into the changing environment between Tx and Rx. \par
+Currently, only Intel and Atheros Wi-Fi NICs can return CSI data through open source tools developed by a number of groups \citep{Halperin_csitool} (Intel NICs) \& \citep{Xie:2015:PPD:2789168.2790124} (Atheros NICs). The CSI of every subcarrier in a MIMO-OFDM Wireless channel is presented as a complex number $a+bj$. The CSI matrix will be of the dimensions $M$x$N$x56 for a 20MHz bandwidth and $M$x$N$x114 for 40MHz bandwidth in theory. However in practice, a Wi-Fi NIC uses several bits to represent $a$ \& $b$ (10 bits for each in Atheros NIC and 8 bits in an Intel NIC) \citep{Xie:2015:PPD:2789168.2790124}. This allows the channel to be represented in a number of complex number at a range of subcarrier frequencies. Due to transmit beamforming, we can obtain an accurate of the channel and thus, the surrounding environment. This makes it extremely useful for fall detection, activity detection and indoor localisation where there is a fixed distance between transmitter and receiver. The scattering multi-path environment introduced by an individual will be reported by each data packet's CSI matrix between Tx and Rx and thus, we can classify the activity or the environment's characteristics. This will be useful for my project for when an individual enters a room, falls, creating a large multi-path scattering environment which will be seen in the CSI data (See Figure \ref{fig:LOS_NLOS}).
 
 
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{Can talk about RSSI in the related work section. Some of these do not return in base units so they use the tool which returns in absolute units with AGC added which is da da da da . Talk about how it has been used in indoor localisation, gesture recognition and others and could be used in the thing of all detection as make reference to my diagram because it scatters and suffers from multipath fading and path loss and this will be shown in CSI data at the end corresponding to a movement and then Machine learning can be used for other things}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Obtaining CSI information}
+As I will be using the Intel Wi-Fi link 5300 Wireless NIC, the open source Linux CSI tool, \cite{Halperin_csitool}, is relevant. It works on an older version of Linux Operating Systems (primarily Ubuntu) using customised versions of Intel's close-source firmware and the open-source \textit{iwlwifi} wireless driver. They have also developed user-space measurement tools, access point functionality for both transmitter and receiver and MATLAB scripts for data analysis and pre-processing \citep{Halperin_csitool}. Using this tool, there was not enough code space on the NIC for both beamforming software paths and encryption software paths which means CSI data can only be retrieved from non-encrypted transmitters/access points. The CSI data is passed to the kernel driver of the receiver computer which passes the CSI to the user-space program for processing. In total, 30 groups of sub-carriers evenly across the 56 or 114 sub-carriers depending on channel bandwidth are obtained by the Linux tool. Frequency selective fading is clearly seen in the CSI where deeply faded subcarriers due to the environment require the transmitter to expend more power for these. The tool returns all of the CSI data in a data structure which can be interpreted in MATLAB using provided scripts. For example, $get\_scaled\_csi()$ returns the CSI data structure in absolute units rather than Intel's reference level \citep{Halperin_csitool}.
+
+
+
 \textbf{How do we obtain CSI information, csi information requires beamforming to be activated. we can use the Linux CSI tool developed with Intel and Microsoft and talk about how it returns data and link to the document that released it} \\\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 
