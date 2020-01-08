@@ -1,10 +1,13 @@
 \documentclass[a4paper,11pt,twoside]{report}
 \usepackage[nodisplayskipstretch]{setspace}
 \usepackage{mathtools}
+\usepackage{etoolbox}
 \usepackage[round]{natbib}
-
+\usepackage{listings}
 \usepackage{Packages}
 \usepackage[framed,numbered,autolinebreaks,useliterate]{Listings}
+%\usepackage{SIunits}
+%\addunit\decibelm{dBm}
 
 \addto\captionsbritish{\renewcommand{\contentsname}{Table of Contents}}
 
@@ -13,6 +16,7 @@
 \newcommand{\shortdoctitle}{Fall Detection}
 \newcommand{\doctitle}{Fall Detection Using Wi-Fi Signals}
 \newcommand{\docsubtitle}{}
+
 
 \newcommand{\authorone}{Robert Keenan}
 \newcommand{\sauthorone}{15333066}
@@ -30,10 +34,8 @@
     pdftitle    = {\shortdoctitle},
     pdfsubject  = {\doctitle}
 }
-%\doublespacing
 \linespread{2}
 \begin{document}
-
 \include{Titlepage}
 
 \normalsize
@@ -43,9 +45,11 @@
 %\pagenumbering{roman}
 %\addcontentsline{toc}{chapter}{Abstract}
 %\input{Chapters/Chapter0_Abstract.tex}
-
+\begingroup
+\singlespacing
 \tableofcontents
-
+\endgroup
+\linespread{2}
 \chapter{Introduction}\label{chapter:Introduction}
 \setcounter{page}{0}
 \pagenumbering{arabic}
