@@ -45,6 +45,7 @@
 %\pagenumbering{roman}
 %\addcontentsline{toc}{chapter}{Abstract}
 %\input{Chapters/Chapter0_Abstract.tex}
+
 \begingroup
     \singlespacing
     \tableofcontents
@@ -77,9 +78,13 @@
 %\chapter{Conclusion}\label{chapter:Conclusion}
 %\input{Chapters/Chapter6_Conclusion.tex}
 
-\bibliographystyle{abbrvnat}
-\bibliography{References}
-\setcitestyle{authoryear,open={(},close={)}}
+\begingroup
+    \singlespacing
+    \bibliographystyle{abbrvnat}
+    \bibliography{References}
+    \setcitestyle{authoryear,open={(},close={)}}
+\endgroup
+
 \newpage
 
 \appendix

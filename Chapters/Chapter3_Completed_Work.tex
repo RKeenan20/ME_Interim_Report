@@ -16,7 +16,7 @@ The CSI was converted using \lstinline{get_scaled_csi()} which combines the RSSI
 \textbf{SNR of one packet and the phase}
 Knowing that I was able to accurately obtain and simply process the CSI data for a $1\times 2$ and $2\times 3$ MIMO-OFDM system, I needed to implement the first stage of data processing for the amplitude and phase. 
 \subsection{Data Processing}
-As mentioned in \textbf{REFERENCE THE WIFALL}, I found that the amplitude is affected by human activities as seen in WiFall \citep{WiFall}. They affect different streams independently and affect different subcarriers in a similar way. As a result, I can average the CSI amplitude samples for each stream into one value instead of 30 using the following equation and the frequency of each subcarrier around the centre frequency of $f_0 = 5GHz$:
+I found that the CSI amplitude is affected by human activities as seen in WiFall \citep{WiFall}. They affect different streams independently and affect different subcarriers in a similar way. As a result, I can average the CSI amplitude samples for each stream into one value instead of 30 using the following equation and the frequency of each subcarrier around the centre frequency of $f_0 = 5GHz$:
 \vspace{-11pt}
 \begin{equation}\label{eqn:3.1}
     CSI_{ij}(K) = \frac{1}{N} \sum_{j=1}^{N} \frac{f_j}{f_0} |CSI_{ij}(K)|
