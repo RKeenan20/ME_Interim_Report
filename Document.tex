@@ -2,12 +2,19 @@
 \usepackage[nodisplayskipstretch]{setspace}
 \usepackage{mathtools}
 \usepackage{etoolbox}
+\usepackage{layout}
 \usepackage[round]{natbib}
 \usepackage{listings}
 \usepackage{Packages}
+\usepackage{wrapfig}
+\usepackage{graphicx}
 \usepackage[framed,numbered,autolinebreaks,useliterate]{Listings}
 %\usepackage{SIunits}
 %\addunit\decibelm{dBm}
+\usepackage[belowskip=-22pt,aboveskip=0pt]{caption}
+ 
+\setlength{\intextsep}{11pt}
+
 
 \addto\captionsbritish{\renewcommand{\contentsname}{Table of Contents}}
 
@@ -47,10 +54,9 @@
 %\addcontentsline{toc}{chapter}{Abstract}
 %\input{Chapters/Chapter0_Abstract.tex}
 
-\begingroup
-    \singlespacing
+\begin{singlespacing}
     \tableofcontents
-\endgroup
+\end{singlespacing}
 
 %\linespread{2}
 \doublespacing
@@ -62,15 +68,20 @@
 \chapter{Literature Review}\label{chapter:Literature Review}
 \input{Chapters/Chapter2_LiteratureReview.tex}
 
+%\begingroup
+%\renewcommand{\cleardoublepage}{}
+%\renewcommand{\clearpage}{}
+%\vspace{33pt}
+\chapter{Completed Work}\label{chapter:Completed Work}
+%\endgroup
+\input{Chapters/Chapter3_Completed_Work.tex}
+
 \begingroup
 \renewcommand{\cleardoublepage}{}
 \renewcommand{\clearpage}{}
-\vspace{33pt}
-\chapter{Completed Work}\label{chapter:Completed Work}
-\endgroup
-\input{Chapters/Chapter3_Completed_Work.tex}
-
+\vspace{44pt}
 \chapter{Initial Results}\label{chapter:Initial Results}
+\endgroup
 \input{Chapters/Chapter4_InterimResults.tex}
 
 \chapter{Future Work}\label{chapter:Future Work}
@@ -92,8 +103,8 @@
 %In this section I can add any code which was used to generate any of the cleaner plots/obtain the plots from the CSI Data
 %Put in any of the code that was used for the amplitude and the phase of each for just a 1x2 SIMO now
 %Look at listings.sty to see how to include the matlab code
-\addcontentsline{toc}{chapter}{Appendix}
-\chapter{My First Appendix}\label{chapter:Appendix A}
-\input{Appendices/Appendix_A.tex}
+%\addcontentsline{toc}{chapter}{Appendix}
+%\chapter{My First Appendix}\label{chapter:Appendix A}
+%\input{Appendices/Appendix_A.tex}
 
 \end{document}
