@@ -14,7 +14,7 @@ Hence, I was able to present one packet's SNR and CSI-phase across the 30 subcar
     \subfloat[CSI amplitude of each stream for one packet]{{\includegraphics[scale = 0.5]{Figures/CSI_amplitude_subcarriers.pdf} }}%
     \qquad
     \subfloat[Wrapped phase of each stream for one packet]{{\includegraphics[width=7cm]{Figures/CSI_phase_subcarriers.pdf} }}%
-    \caption{($2\times 2$ MIMO-OFDM system) CSI amplitude experiences frequency dependent fading at the edges of the channel bandwidth (Subcarriers 1 and 30). CSI phase is wrapped between $\pi$ and $-\pi$ rads. in a typical '$zig-zag$' pattern}%
+    \caption{($2\times 2$ MIMO-OFDM channel) CSI amplitude experiences frequency dependent fading at the edges of the channel bandwidth (Subcarriers 1 and 30). CSI phase is wrapped between $\pi$ and $-\pi$ rads. in a typical '$zig-zag$' pattern.}%
     \label{fig:CSIAMPLITUDE&PHASE}%
 \end{figure}
 The CSI phase can be unwrapped using \lstinline{unwrap} in MATLAB to verify the phase according to RT-Fall and \cite{perceivingAccurateCSI}. It was decreasing for each consecutive subcarrier.
@@ -24,7 +24,7 @@ The CSI phase can be unwrapped using \lstinline{unwrap} in MATLAB to verify the 
   \caption{CSI unwrapped phase for each of the 4 streams is presented correctly as descending for all 30 subcarriers}
   \label{fig:unwrappedPhase}
 \end{figure}\end{comment}
-However, each stream has 30 values per packet. A link between each of these needed to be found to simplify the calculations:
+However, each stream has 30 values per packet. A link between each of these needed to be found to simplify the calculations using streams such as 1-1 below (TX \& RX = 1):
 \begin{figure}[H]%
     \centering
     \subfloat[Different Streams for Subcarrier 15]{{\includegraphics[scale = 0.5]{Figures/subcarrier15.pdf} }}%
@@ -37,13 +37,13 @@ In Figure 4.4 (a), the fall occurring at the 600th packet affects streams 1-1, 1
 \section{Data Processing}
 \subsection{CSI Amplitude}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The result of using Eqn. \ref{eqn:3.1} is shown below where the 30 subcarriers shown in Fig. 4.4 (a) are calculated and converted to one value per packet in Fig. 4.4 (b). The overall shape of the subcarriers is preserved but the full SNR range is not (some subcarriers have values around 27dB while Fig 4.5 (b)'s maximum point is 25dB). This implies a loss of frequency diversity in the calculation making it problematic for fall detection as seen by WiFall.
+The result of using Eqn. \ref{eqn:3.1} is shown below where the 30 subcarriers shown in Fig. 4.4 (a) are calculated and converted to one value per packet in Fig. 4.4 (b). The overall shape of the subcarriers is preserved but the full SNR range is not (some subcarriers have values around 27dB while Fig. 4.5 (b)'s maximum point is 25dB). This implies a loss of frequency diversity in the calculation making it problematic for fall detection as seen by WiFall.
 \begin{figure}[H]%
     \centering
     \subfloat[Subcarrier amplitudes in Stream 1-1]{{\includegraphics[scale = 0.5]{Figures/onlytaking10.pdf} }}%
     \qquad
     \subfloat[Averaged amplitude. One value per packet]{{\includegraphics[scale=0.5]{Figures/averagedForAmplitude.pdf} }}%
-    \caption{Using the findings from Fig. \ref{fig:subcarriersVSstreams}, I apply Eqn. \ref{eqn:3.1} to obtain a simpler plot in (b)}%
+    \caption{Using the findings from Fig. \ref{fig:subcarriersVSstreams}, I apply Eqn. \ref{eqn:3.1} to obtain a simpler amplitude plot in (b)}%
     \label{fig:applyingAmplitudeEquation}%
 \end{figure}
 \vspace{11pt}
@@ -55,7 +55,7 @@ The result of using Eqn. \ref{eqn:3.1} is shown below where the 30 subcarriers s
 \multicolumn{2}{c}{\includegraphics[scale = 0.5]{Figures/cleanLOSForAmplitude.pdf} }\\
 \multicolumn{2}{c}{(c) Clean LOS from Tx-Rx}
 \end{tabular}
-\caption{CSI amplitude with with person falling, standing and then being absent (Clean LOS)}
+\caption{CSI amplitude with a person falling, standing and then being absent (Clean LOS) in separate tests}
 \label{fig:diffamplitudes}%
 \end{figure}
 I carried out a number of tests using the averaged CSI amplitude as shown in Fig. 4.5. Mobile and immobile activities obtain different CSI amplitude variance with time. It is clear in (a) that something has occurred but this "fall" could also be confused with the fluctuation in (c) caused by the small disturbance closer to the receiver with nobody in the environment. It is hard to differentiate and recognise patterns between each of the situations. 
@@ -71,16 +71,16 @@ This plot above contains the unknown phase offset and timing offset as alluded t
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.75]{Figures/cleanPhaseFallCLASSROOM.pdf}
-    \caption{Phase difference from Fig. 4.7 after applying linear transform in Eqn. \ref{eqn:3.5}.}
+    \caption{Phase difference from Fig. 4.6 after applying linear transform in Eqn. \ref{eqn:3.5}}
     \label{fig:cleanerPhaseDiff}
 \end{figure}
-This plot has all phase offsets and outliers removed. The data is now interpretable in the time domain and human activities can be noticed. 
+This plot has all phase offsets and outliers removed. The data is now interpretable in the time domain (after interpolation) and human activities can be noticed. 
 \subsection{Phase Difference \& Amplitude for Fall Detection}
 Clearly, I have demonstrated the phase difference is a much more granular indicator of a human activity in an environment. I tested this using a "walking-fall" as shown below:
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.75]{Figures/subplotFall.pdf}
-    \caption{CSI amplitude and transformed phase difference for 4m environment between Tx and Rx with a person walking into the environment, falling and standing up again. }
+    \caption{CSI amplitude and transformed phase difference for 4m environment between TX and RX with a person walking into the environment, falling and standing up again}
     \label{fig:finalPlot}
 \end{figure}
-Both the amplitude and phase difference experience a sudden disturbance on start up. This is a combination of the rate selection algorithm of the Archer C6 router adjusting and the test subject walking close to the receiver creating a multipath environment. The fall occurring just before the 600th packet creates a very large disturbance in the phase difference. The CSI amplitude suffers a disturbance also. However, the amplitude's response to the fall is very similar to the disturbance caused by the person walking between the 200th and 400th packet. The amplitude can be used for activity detection as in WiFall but isn't clear enough for fall detection. The phase difference clearly shows where the fall finished, save for a few oscillations. It is a much more sensitive indicator and the transformed phase is much less noisy than the amplitude. In a more complex MIMO-OFDM system, the phase difference resolution will improve due to the introduction of more antennas into the system and thus, performance for LOS/NLOS environments will greatly improve.
+Both the amplitude and phase difference experience a sudden disturbance at the start. This is a combination of the rate selection algorithm of the Archer C6 router adjusting and the test subject walking close to the receiver creating a multipath environment. The fall occurring just before the 600th packet creates a very large disturbance in the phase difference. The CSI amplitude suffers a disturbance also. However, the amplitude's response to the fall is very similar to the disturbance caused by the person walking between the 200th and 400th packet. The amplitude can be used for activity detection as in WiFall but isn't clear enough for fall detection. The phase difference clearly shows where the fall finished, save for a few oscillations. It is a much more sensitive indicator and the transformed phase is much less noisy than the amplitude. In a more complex MIMO-OFDM channel, the phase difference resolution will improve due to the introduction of more antennas into the system and thus, performance for LOS/NLOS environments will greatly improve.
